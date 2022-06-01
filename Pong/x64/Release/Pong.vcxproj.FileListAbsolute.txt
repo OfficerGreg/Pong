@@ -1,0 +1,2 @@
+F:\CPP\Pong\Pong\x64\Release\Pong.vcxproj.CopyComplete
+C:\Users\Jakub\Documents\CPP\projects\Pong\Pong\x64\Release\Pong.vcxproj.CopyComplete
