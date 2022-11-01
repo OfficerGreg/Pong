@@ -1,4 +1,6 @@
-#pragma once
+#ifndef PONG_BALL_H
+#define PONG_BALL_H
+
 #include <raylib.h>
 
 class Ball {
@@ -14,11 +16,10 @@ public:
 		speedY = 300;
 	}
 
-	void Draw() {
-
+	void Draw()
+	{
 		DrawCircle((int)x, (int)y, rad, WHITE);
 	}
-
 
 	void Collisions() {
 		x += speedX * GetFrameTime();
@@ -35,17 +36,6 @@ public:
 			y = GetScreenHeight();
 			speedY *= -1;
 		}
-		if (x < 0)
-		{
-			x = 0;
-			speedX *= -1;
-		}
-
-		if (x > GetScreenWidth())
-		{
-			x = GetScreenWidth();
-			speedX *= -1;
-		}
-
 	}
 };
+#endif // !PONG_BALL_H

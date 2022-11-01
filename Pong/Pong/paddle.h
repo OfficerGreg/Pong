@@ -1,9 +1,10 @@
-#pragma once
+#ifndef PONG_PADDLE_H
+#define PONG_PADDLE_H
+
 #include <raylib.h>
 
 class Paddle {
 public:
-
 	float x1, y1;
 	float speed1;
 	float width1, height1;
@@ -11,7 +12,6 @@ public:
 	float x2, y2;
 	float speed2;
 	float width2, height2;
-
 
 	Paddle() {
 		x1 = 50;
@@ -38,13 +38,19 @@ public:
 	}
 	void Draw() {
 		DrawRectangle(x1 - width1 / 2, y1 - height1 / 2, 10, 100, WHITE);
-		DrawRectangle(x2 - width2 / 2, y2 - height2 / 2, 10, 100, WHITE);
-		
+		DrawRectangle(x2 - width2 / 2, y2 - height2 / 2, 10, 100, WHITE);	
 	}
-	void Collisions() {
+	void Collisions()
+	{
+		if (y1 > GetScreenHeight() - height1 / 2)
+			y1 -= speed1 * GetFrameTime();
+		if (y1 < 0 + height1 / 2)
+			y1 += speed1 * GetFrameTime();
+		if (y2 > GetScreenHeight() - height2 / 2)
+			y2 -= speed2 * GetFrameTime();
+		if (y2 < 0 + height2 / 2)
+			y2 += speed2 * GetFrameTime();
 	}
-private:
-
-
-
 };
+
+#endif // !#define PONG_PADDLE_H

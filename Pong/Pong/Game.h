@@ -1,67 +1,53 @@
-#pragma once
-#include <raylib.h>
-#include "paddle.h"
-#include "Ball.h"
+#include "Sounds.h"
+
 
 class Game {
-public:
 	int winX, winY;
 	const char* Title;
+public:
 
+
+		Sounds sounds;
 	void Init() {
 
-		winX = 800;
-		winY = 600;
-		Title = "pong";
+		winX = 1000;
+		winY = 800;
+		Title = "Pong";
 
 		InitWindow(winX, winY, Title);
+
 		SetWindowState(FLAG_VSYNC_HINT);
+		sounds.Init();
 	}
-	void Collisions() {
-	}
+
+
 	
 	void update() {
 		
-			Ball ball;
-			Paddle paddle;
-
-
+		Ball ball;
+		Paddle paddle;
+		Board board;
+		Score score;
+		
+		while (!WindowShouldClose()) {
+			ball.Collisions();
+			paddle.Collisions();
 			
 
-		while (!WindowShouldClose()) {
-
-			ball.Collisions();
-
-			if (CheckCollisionCircleRec(Vector2{ ball.x, ball.y }, ball.rad, Rectangle{ paddle.x1 - paddle.width1 / 2, paddle.y1 - paddle.height1 / 2, 10, 100 }))
-			{
-				if (ball.speedX < 0)
-				{
-					ball.speedX *= -1.1f;
-					ball.speedY = (ball.y - paddle.y1) / (paddle.height1 / 2) * ball.speedX;
-					ball.speedX += 50;
-					ball.speedY += 50;
-				}
-			}
-			if (CheckCollisionCircleRec(Vector2{ ball.x, ball.y }, ball.rad, Rectangle{ paddle.x2 - paddle.width2 / 2, paddle.y2 - paddle.height2 / 2, 10, 100 }))
-			{
-				if (ball.speedX > 0)
-				{
-					ball.speedX *= -1.1f;
-					ball.speedY = (ball.y - paddle.y2) / (paddle.height2 / 2) * -ball.speedX;
-					ball.speedX -= 50;
-					ball.speedY -= 50;
-
-				}
-			}
-			if (ball.y < 0)
-				break;
 			paddle.input();
+			score.UpdateScore();
+			if (ball.x < 0)
+				score.playerScore1++;
+				
 			BeginDrawing();
 			ClearBackground(BLACK);
 
 			ball.Draw();
+			score.DrawScore();
 			paddle.Draw();
-			//DrawFPS(0, 0);
+			board.MidLine();
+			board.Border();
+			DrawFPS(0, 0);
 			EndDrawing();
 		}
 		CloseWindow();
