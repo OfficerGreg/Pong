@@ -12,7 +12,7 @@
     .\vcpkg install raylib:x64-windows
   ```
   
-  -open **sln.** file with visual studio
-  -build the solution
+  - open **sln.** file with visual studio
+  - build the solution
   
   
