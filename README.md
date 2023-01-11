@@ -11,7 +11,6 @@
   ```
     .\vcpkg install raylib:x64-windows
   ```
-  ![image](https://user-images.githubusercontent.com/73076485/211756167-ea623a83-c9d9-4051-8d70-8adc29f36dab.png)
   
   -open **sln.** file with visual studio
   -build the solution
